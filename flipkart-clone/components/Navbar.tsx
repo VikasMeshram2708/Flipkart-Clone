@@ -9,7 +9,7 @@ export default function Navbar() {
   const path = usePathname();
   const [toggleSidebar, setToggleSidebar] = useState(false);
   return (
-    <nav className="bg-baseb shadow-slate-800 shadow-lg p-3 relative">
+    <nav className="bg-base p-3 relative shadow-white shadow">
       <div className="flex items-center flex-wrap justify-between">
         <div className="flex items-center gap-3">
           <span className="block md:hidden">
@@ -27,7 +27,7 @@ export default function Navbar() {
 
         {/* Sidebar */}
         {toggleSidebar && (
-          <div className="transition min-h-[99vh] w-44 absolute top-0 left-0 bg-slate-900 text-white">
+          <div className="transition min-h-[99vh] w-44 absolute top-0 left-0 bg-base-200 text-white">
             <div className="p-5">
               <GiCrossedSabres
                 onClick={() => setToggleSidebar((prev) => !prev)}
@@ -40,56 +40,56 @@ export default function Navbar() {
             </div>
             <ul className="grid gap-5 text-[.95rem] sm:text-[1.5rem]">
               <li
-                className={`p-5 ${path === '/' && 'border-l-8 border-blue-800 bg-slate-950'}`}
+                className={`p-5 ${path === '/' && 'border-l-8 border-green-300 bg-black'}`}
               >
                 <Link href="/" className="p-2">
                   Home
                 </Link>
               </li>
               <li
-                className={`p-5 ${path === '/men' && 'border-l-8 border-blue-800 bg-slate-950'}`}
+                className={`p-5 ${path === '/men' && 'border-l-8 border-green-300 bg-black'}`}
               >
                 <Link href="/men" className="p-2">
                   Men
                 </Link>
               </li>
               <li
-                className={`p-5 ${path === '/women' && 'border-l-8 border-blue-800 bg-slate-950'}`}
+                className={`p-5 ${path === '/women' && 'border-l-8 border-green-300 bg-black'}`}
               >
                 <Link href="/women" className="p-2">
                   Women
                 </Link>
               </li>
               <li
-                className={`p-5 ${path === '/kids' && 'border-l-8 border-blue-800 bg-slate-950'}`}
+                className={`p-5 ${path === '/kids' && 'border-l-8 border-green-300 bg-black'}`}
               >
                 <Link href="/kids" className="p-2">
                   Kids
                 </Link>
               </li>
               <li
-                className={`p-5 ${path === '/about' && 'border-l-8 border-blue-800 bg-slate-950'}`}
+                className={`p-5 ${path === '/about' && 'border-l-8 border-green-300 bg-black'}`}
               >
                 <Link href="/about" className="p-2">
                   About
                 </Link>
               </li>
               <li
-                className={`p-5 ${path === '/contact' && 'border-l-8 border-blue-800 bg-slate-950'}`}
+                className={`p-5 ${path === '/contact' && 'border-l-8 border-green-300 bg-black'}`}
               >
                 <Link href="/contact" className="p-2">
                   Contact
                 </Link>
               </li>
               <li
-                className={`p-5 ${path === '/privacy' && 'border-l-8 border-blue-800 bg-slate-950'}`}
+                className={`p-5 ${path === '/privacy' && 'border-l-8 border-green-300 bg-black'}`}
               >
                 <Link href="/privacy" className="p-2">
                   Privacy Policy
                 </Link>
               </li>
               <li
-                className={`p-5 ${path === '/terms' && 'border-l-8 border-blue-800 bg-slate-950'}`}
+                className={`p-5 ${path === '/terms' && 'border-l-8 border-green-300 bg-black'}`}
               >
                 <Link href="/terms" className="p-2">
                   Tems of Use
@@ -101,29 +101,45 @@ export default function Navbar() {
 
         {/* Large Screen Nav Items */}
         <ul className="hidden md:flex items-center gap-5">
-          <li>
+          <li
+            className={`${path === '/' && 'border-b-4 border-green-300 p-5'}`}
+          >
             <Link href="/">Home</Link>
           </li>
-          <li>
-            <Link href="/">Men</Link>
+          <li
+            className={`${path === '/men' && 'border-b-4 border-green-300 p-5'}`}
+          >
+            <Link href="/men">Men</Link>
           </li>
-          <li>
-            <Link href="/">Women</Link>
+          <li
+            className={`${path === '/women' && 'border-b-4 border-green-300 p-5'}`}
+          >
+            <Link href="/women">Women</Link>
           </li>
-          <li>
-            <Link href="/">Kids</Link>
+          <li
+            className={`${path === '/kids' && 'border-b-4 border-green-300 p-5'}`}
+          >
+            <Link href="/kids">Kids</Link>
           </li>
-          <li>
-            <Link href="/">About</Link>
+          <li
+            className={`${path === '/about' && 'border-b-4 border-green-300 p-5'}`}
+          >
+            <Link href="/about">About</Link>
           </li>
-          <li>
-            <Link href="/">Contact</Link>
+          <li
+            className={`${path === '/contact' && 'border-b-4 border-green-300 p-5'}`}
+          >
+            <Link href="/contact">Contact</Link>
           </li>
-          <li>
-            <Link href="/">Privacy Policy</Link>
+          <li
+            className={`${path === '/privacy' && 'border-b-4 border-green-300 p-5'}`}
+          >
+            <Link href="/privacy">Privacy Policy</Link>
           </li>
-          <li>
-            <Link href="/">Tems of Use</Link>
+          <li
+            className={`${path === '/terms' && 'border-b-4 border-green-300 p-5'}`}
+          >
+            <Link href="/terms">Tems of Use</Link>
           </li>
         </ul>
         <div>
