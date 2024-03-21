@@ -1,0 +1,3 @@
+type ToggleSideBar = {
+  toggle: boolean;
+};

@@ -1,20 +1,18 @@
-import type { Config } from "tailwindcss";
+/* eslint-disable global-require */
+/* eslint-disable @typescript-eslint/quotes */
+/* eslint-disable import/no-extraneous-dependencies */
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
-    },
+  theme: {},
+  daisyui: {
+    themes: ['black', 'light', 'dark', 'cupcake'],
   },
-  plugins: [],
+  plugins: [require('daisyui')],
 };
 export default config;
