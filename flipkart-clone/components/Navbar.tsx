@@ -1,13 +1,17 @@
 'use client';
 
+import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { GiHamburgerMenu, GiCrossedSabres } from 'react-icons/gi';
+import UserAvatar from './UserAvatar';
 
 export default function Navbar() {
   const path = usePathname();
   const [toggleSidebar, setToggleSidebar] = useState(false);
+
+  const { data } = useSession();
   return (
     <nav className="sticky top-0 z-40 bg-base-100 p-3 shadow-white shadow">
       <div className="flex items-center flex-wrap justify-between">
@@ -142,13 +146,17 @@ export default function Navbar() {
             <Link href="/terms">Tems of Use</Link>
           </li>
         </ul>
-        <div>
-          <button
-            type="button"
-            className="btn btn-outline btn-md btn-base-100 rounded-md text-lg"
-          >
-            Login
-          </button>
+        <div className="flex items-center gap-3">
+          {data && <UserAvatar />}
+          {!data && (
+            <button
+              onClick={() => signIn('google')}
+              type="button"
+              className="btn btn-outline btn-md btn-base-100 rounded-md text-lg"
+            >
+              Login
+            </button>
+          )}
         </div>
       </div>
     </nav>
