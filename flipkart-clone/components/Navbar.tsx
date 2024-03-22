@@ -9,7 +9,7 @@ export default function Navbar() {
   const path = usePathname();
   const [toggleSidebar, setToggleSidebar] = useState(false);
   return (
-    <nav className="bg-base p-3 shadow-white shadow">
+    <nav className="sticky top-0 z-40 bg-base-100 p-3 shadow-white shadow">
       <div className="flex items-center flex-wrap justify-between">
         <div className="flex items-center gap-3">
           <span className="block md:hidden">
