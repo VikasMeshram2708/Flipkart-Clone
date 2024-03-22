@@ -36,20 +36,18 @@ export default function Carousel() {
 
   return (
     <section className="min-h-screen">
-      <div className="container mx-auto">
-        <Slider {...settings}>
-          {productsData.map((product) => (
-            <div key={product.id} className="px-4 h-[27rem] rounded relative">
-              <Image
-                src={product.url}
-                className="w-full rounded"
-                fill
-                alt="products"
-              />
-            </div>
-          ))}
-        </Slider>
-      </div>
+      <Slider {...settings}>
+        {productsData.map((product) => (
+          <div key={product.id} className="px-4 h-[27rem] rounded relative">
+            <Image
+              src={product.url}
+              className="w-full rounded"
+              fill
+              alt="products"
+            />
+          </div>
+        ))}
+      </Slider>
     </section>
   );
 }

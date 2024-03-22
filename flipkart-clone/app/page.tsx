@@ -24,7 +24,7 @@ export default function Home() {
       </div>
 
       {/* 3d Cards */}
-      <div className="grid grid-cols-3 b -mt-96">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 -mt-96">
         {data?.map((product) => (
           <div key={product?.id}>
             <ThreeDCardDemo

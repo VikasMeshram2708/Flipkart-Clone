@@ -6,8 +6,9 @@ import Navbar from '@/components/Navbar';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Flipkart CLone - Grab Your Deals',
-  description: 'Flipkart grab latest deals.',
+  title:
+    'BharatMart CLone - Grab latest deals.',
+  description: 'BharatMart Grab hot deals with daily discount and interesting offers.',
 };
 
 export default function RootLayout({
