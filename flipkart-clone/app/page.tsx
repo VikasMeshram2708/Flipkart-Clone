@@ -1,7 +1,11 @@
+import Carousel from '@/components/Carousel';
+
 export default function Home() {
   return (
     <main className="">
-      <h1>Hello,World!</h1>
+      <div className="mt-10">
+        <Carousel />
+      </div>
     </main>
   );
 }
