@@ -1,12 +1,15 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 export default function ProductCard({
+  id,
   title,
   description,
   price,
   imageSrc,
 }: {
+  id: number;
   title: string;
   description: string;
   price: number;
@@ -15,12 +18,14 @@ export default function ProductCard({
   return (
     <div className="border-2 border-green-300 rounded-lg shadow-md overflow-hidden">
       <div className="relative h-80 overflow-hidden">
-        <Image
-          src={imageSrc}
-          alt={title}
-          fill
-          className="bg-cover transition-transform duration-300 hover:scale-105"
-        />
+        <Link href={`/${id}`}>
+          <Image
+            src={imageSrc}
+            alt={title}
+            fill
+            className="cursor-pointer bg-cover transition-transform duration-300 hover:scale-105"
+          />
+        </Link>
       </div>
       <div className="p-4">
         <h2 className="line-clamp-1 text-lg font-semibold mb-2">{title}</h2>
@@ -30,7 +35,10 @@ export default function ProductCard({
             $
             {price}
           </p>
-          <button type="button" className="btn btn-success rounded-md btn-outline btn-md">
+          <button
+            type="button"
+            className="btn btn-success rounded-md btn-outline btn-md"
+          >
             Buy Now
           </button>
         </div>

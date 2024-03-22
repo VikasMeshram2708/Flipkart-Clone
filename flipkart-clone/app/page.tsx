@@ -16,6 +16,7 @@ export default async function Home() {
         {productItem.map((product) => (
           <div key={product?.id}>
             <ProductCard
+              id={product?.id}
               title={product?.title}
               description={product?.description}
               imageSrc={product?.image}
