@@ -1,8 +1,9 @@
 'use client';
 
 import Carousel from '@/components/Carousel';
-import { ThreeDCardDemo } from '@/components/ui/ProductCard';
-import { useEffect, useState } from 'react';
+import ProductCard from '@/components/ProductCard';
+import { Suspense, useEffect, useState } from 'react';
+import Loading from './Loading';
 
 export default function Home() {
   const [data, setData] = useState<Product[]>([]);
@@ -24,15 +25,17 @@ export default function Home() {
       </div>
 
       {/* 3d Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 -mt-96">
+      <div className="mt-36 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:gap-5 lg:gap-10">
         {data?.map((product) => (
           <div key={product?.id}>
-            <ThreeDCardDemo
-              title={product?.title}
-              description={product?.description}
-              imageSrc={product?.image}
-              price={product?.price}
-            />
+            <Suspense fallback={<Loading />}>
+              <ProductCard
+                title={product?.title}
+                description={product?.description}
+                imageSrc={product?.image}
+                price={product?.price}
+              />
+            </Suspense>
           </div>
         ))}
       </div>

@@ -35,7 +35,7 @@ export default function Carousel() {
   };
 
   return (
-    <section className="min-h-screen">
+    <section>
       <Slider {...settings}>
         {productsData.map((product) => (
           <div key={product.id} className="px-4 h-[27rem] rounded relative">

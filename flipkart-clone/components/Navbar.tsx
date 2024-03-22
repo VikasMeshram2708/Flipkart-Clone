@@ -9,7 +9,7 @@ export default function Navbar() {
   const path = usePathname();
   const [toggleSidebar, setToggleSidebar] = useState(false);
   return (
-    <nav className="bg-base p-3 relative shadow-white shadow">
+    <nav className="bg-base p-3 shadow-white shadow">
       <div className="flex items-center flex-wrap justify-between">
         <div className="flex items-center gap-3">
           <span className="block md:hidden">
@@ -21,13 +21,13 @@ export default function Navbar() {
             />
           </span>
           <h1 className="text-white font-semibold text-[2rem]">
-            <Link href="/">Flipkart</Link>
+            <Link href="/">BharatMart</Link>
           </h1>
         </div>
 
         {/* Sidebar */}
         {toggleSidebar && (
-          <div className="transition min-h-[99vh] w-44 absolute top-0 left-0 bg-base-200 text-white">
+          <div className="transition min-h-[99vh] w-44 fixed z-40 top-0 left-0 bg-base-200 text-white">
             <div className="p-5">
               <GiCrossedSabres
                 onClick={() => setToggleSidebar((prev) => !prev)}
@@ -35,7 +35,7 @@ export default function Navbar() {
                 size={20}
               />
               <h1 className="text-white font-semibold text-[1.5rem] mb-10">
-                <Link href="/">Flipkart</Link>
+                <Link href="/">BharatMart</Link>
               </h1>
             </div>
             <ul className="grid gap-5 text-[.95rem] sm:text-[1.5rem]">
