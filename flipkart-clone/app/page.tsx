@@ -2,12 +2,11 @@
 
 import Carousel from '@/components/Carousel';
 import ProductCard from '@/components/ProductCard';
-import { Suspense, useEffect, useState } from 'react';
-import Loading from './Loading';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [data, setData] = useState<Product[]>([]);
-  // const imageSrc = 'https://rb.gy/y89xfw';
+
   useEffect(() => {
     const getProductsData = async () => {
       const response = await fetch('https://fakestoreapi.com/products');
@@ -28,14 +27,12 @@ export default function Home() {
       <div className="mt-36 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:gap-5 lg:gap-10">
         {data?.map((product) => (
           <div key={product?.id}>
-            <Suspense fallback={<Loading />}>
-              <ProductCard
-                title={product?.title}
-                description={product?.description}
-                imageSrc={product?.image}
-                price={product?.price}
-              />
-            </Suspense>
+            <ProductCard
+              title={product?.title}
+              description={product?.description}
+              imageSrc={product?.image}
+              price={product?.price}
+            />
           </div>
         ))}
       </div>
