@@ -9,6 +9,25 @@ export const POST = async (req: NextRequest) => {
   try {
     const reqBody: UserShema = await req.json();
 
+    // check if the email is alread in use
+    const emailExists = await prismaInstance.user.findUnique({
+      where: {
+        email: reqBody.email,
+      },
+    });
+
+    if (emailExists) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'User Already exists.',
+        },
+        {
+          status: 422,
+        },
+      );
+    }
+
     // hash teh password
     const hashedPassword = await bcrypt.hash(reqBody.password, 10);
     // Connect To DB
@@ -37,7 +56,8 @@ export const POST = async (req: NextRequest) => {
         return NextResponse.json(
           {
             success: false,
-            message: 'An account with this email address already exists. Please use a different email address.',
+            message:
+              'An account with this email address already exists. Please use a different email address.',
           },
           {
             status: 500,
