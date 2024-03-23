@@ -33,6 +33,17 @@ export const POST = async (req: NextRequest) => {
   } catch (e) {
     const err = e as Error;
     if (e instanceof PrismaClientKnownRequestError) {
+      if (e.code === 'P2002') {
+        return NextResponse.json(
+          {
+            success: false,
+            message: 'An account with this email address already exists. Please use a different email address.',
+          },
+          {
+            status: 500,
+          },
+        );
+      }
       return NextResponse.json(
         {
           success: false,
