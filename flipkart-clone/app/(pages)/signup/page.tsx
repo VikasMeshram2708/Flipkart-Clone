@@ -66,7 +66,7 @@ export default function SignUp() {
           type="submit"
           className="w-full py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
         >
-          Login
+          Sign Up
         </button>
         <div className="flex items-center justify-between mt-4 text-gray-300">
           Already a User ?
