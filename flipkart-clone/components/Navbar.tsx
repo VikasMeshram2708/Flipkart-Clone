@@ -1,6 +1,6 @@
 'use client';
 
-import { signIn, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -147,15 +147,16 @@ export default function Navbar() {
           </li>
         </ul>
         <div className="flex items-center gap-3">
-          {status === 'loading' && <span className="loading loading-infinity loading-lg" />}
+          {status === 'loading' && (
+            <span className="loading loading-infinity loading-lg" />
+          )}
           {status === 'authenticated' && <UserAvatar />}
           {status === 'unauthenticated' && (
             <button
-              onClick={() => signIn()}
               type="button"
               className="btn btn-outline btn-md btn-base-100 rounded-md text-lg"
             >
-              Login
+              <Link href="/api/auth/signin">Login</Link>
             </button>
           )}
         </div>
