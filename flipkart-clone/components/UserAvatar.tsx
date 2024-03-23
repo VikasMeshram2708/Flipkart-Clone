@@ -2,9 +2,12 @@
 
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import { SyntheticEvent } from 'react';
 
 export default function UserAvatar() {
   const { data } = useSession();
+  const defaultUserImage = 'https://rb.gy/fr8yka';
+  const fallBackImage = 'https://rb.gy/pqxldq';
   return (
     <div className="dropdown dropdown-end border-2 border-green-300 rounded-full">
       <div
@@ -16,7 +19,10 @@ export default function UserAvatar() {
           <Image
             fill
             alt={data?.user?.name as string}
-            src={data?.user?.image as string}
+            src={(data?.user?.image as string) || defaultUserImage}
+            onError={(e: SyntheticEvent<HTMLImageElement>) => {
+              e.currentTarget.src = fallBackImage;
+            }}
           />
         </div>
       </div>

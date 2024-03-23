@@ -11,7 +11,7 @@ export default function Navbar() {
   const path = usePathname();
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
-  const { data } = useSession();
+  const { status } = useSession();
   return (
     <nav className="sticky top-0 z-40 bg-base-100 p-3 shadow-white shadow">
       <div className="flex items-center flex-wrap justify-between">
@@ -147,8 +147,9 @@ export default function Navbar() {
           </li>
         </ul>
         <div className="flex items-center gap-3">
-          {data && <UserAvatar />}
-          {!data && (
+          {status === 'loading' && <span className="loading loading-infinity loading-lg" />}
+          {status === 'authenticated' && <UserAvatar />}
+          {status === 'unauthenticated' && (
             <button
               onClick={() => signIn()}
               type="button"

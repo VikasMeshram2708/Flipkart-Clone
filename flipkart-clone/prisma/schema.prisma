@@ -34,6 +34,8 @@ model User {
 
   password String?
 
+  image String?
+
   products Products[]
 
   createdAt DateTime @default(now())
