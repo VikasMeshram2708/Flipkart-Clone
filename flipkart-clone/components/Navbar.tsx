@@ -150,7 +150,7 @@ export default function Navbar() {
           {data && <UserAvatar />}
           {!data && (
             <button
-              onClick={() => signIn('google')}
+              onClick={() => signIn()}
               type="button"
               className="btn btn-outline btn-md btn-base-100 rounded-md text-lg"
             >
