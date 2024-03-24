@@ -45,11 +45,11 @@ export default function Login() {
     }
   };
 
-  // const handleGoogleSignIn = async () => {
-  //   await signIn('google', {
-  //     callbackUrl: '/cart',
-  //   });
-  // };
+  const handleGoogleSignIn = async () => {
+    await signIn('google', {
+      callbackUrl: '/cart',
+    });
+  };
   return (
     <section className="flex items-center justify-center h-screen bg-gray-900/30">
       <form
@@ -111,8 +111,8 @@ export default function Login() {
         </button>
         <button
           type="button"
-          // onClick={handleGoogleSignIn}
-          className="w-full mt-3 btn btn-outline btn-base-300 cursor-not-allowed"
+          onClick={handleGoogleSignIn}
+          className="w-full mt-3 btn btn-outline btn-base-300"
         >
           Login with Google
         </button>

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
@@ -57,19 +58,25 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: 'jwt',
-    maxAge: 60 * 60,
   },
   jwt: {
     secret: process.env.NEXTAUTH_JWT_SECRET,
     maxAge: 60 * 60 * 24,
   },
   callbacks: {
-    async session({ session, user, token }) {
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.email = token.email;
+        session.user.name = token.name;
+      }
+      console.log('session', session);
       return session;
     },
-    async jwt({
-      token, user, account, profile, isNewUser,
-    }) {
+    async jwt({ token, user }) {
+      if (token && user) {
+        token.email = user.email;
+        token.name = user.name;
+      }
       return token;
     },
   },
