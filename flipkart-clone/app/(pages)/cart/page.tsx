@@ -1,15 +1,16 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
+'use client';
 
-export default async function Cart() {
-  const session = await getServerSession(authOptions);
+import { useSession } from 'next-auth/react';
+
+export default function Cart() {
+  const { data, status } = useSession();
   return (
     <section className="min-h-screen max-w-[90%] mx-auto">
       <h1>Cart</h1>
-      {session && (
-        <p className="text-white b">{JSON.stringify(session?.user?.name)}</p>
+      {status === 'authenticated' && (
+        <p className="text-white b">{JSON.stringify(data.user?.name)}</p>
       )}
-      {!session && <p>No Users Found.</p>}
+      {status === 'unauthenticated' && <p>No Users Found.</p>}
     </section>
   );
 }

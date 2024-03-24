@@ -22,19 +22,21 @@ export default function Login() {
         email,
         password,
       });
-
       if (result?.error) {
         return toast.error('Invalid email or password provided.');
       }
       setEmail('');
       setPassword('');
+      toast.success('User Logged In');
+      router.refresh();
       await new Promise<void>((resolve) => {
-        toast.success('User Logged In');
         setTimeout(() => {
-          resolve();
+          router.push('/cart');
         }, 3000);
+        resolve();
       });
-      return router.push('/cart');
+      Promise.resolve();
+      return result;
     } catch (e) {
       return console.log(e instanceof Error && e?.message);
     } finally {
@@ -43,11 +45,11 @@ export default function Login() {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    await signIn('google', {
-      callbackUrl: '/cart',
-    });
-  };
+  // const handleGoogleSignIn = async () => {
+  //   await signIn('google', {
+  //     callbackUrl: '/cart',
+  //   });
+  // };
   return (
     <section className="flex items-center justify-center h-screen bg-gray-900/30">
       <form
@@ -109,8 +111,8 @@ export default function Login() {
         </button>
         <button
           type="button"
-          onClick={handleGoogleSignIn}
-          className="w-full mt-3 btn btn-outline btn-base-300"
+          // onClick={handleGoogleSignIn}
+          className="w-full mt-3 btn btn-outline btn-base-300 cursor-not-allowed"
         >
           Login with Google
         </button>

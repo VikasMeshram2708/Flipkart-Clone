@@ -1,14 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
-import ConnectDb from '@/helpers/Db';
 import prismaInstance from '@/helpers/PrismaInstance';
-import bcrypt from 'bcryptjs';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { compare } from 'bcryptjs';
 
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/login',
   },
+  adapter: PrismaAdapter(prismaInstance),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -24,52 +26,51 @@ export const authOptions: NextAuthOptions = {
           placeholder: 'Enter password',
         },
       },
-      // @ts-ignore
-      async authorize(credentials) {
-        // Connect to DB
-        await ConnectDb();
+      async authorize(credentials, req) {
+        if (!credentials?.email || !credentials.password) {
+          return null;
+        }
 
-        // Find user by email
-        const user = await prismaInstance.user.findUnique({
-          where: { email: credentials?.email as string },
+        const userExists = await prismaInstance.user.findUnique({
+          where: {
+            email: credentials.email,
+          },
         });
 
-        if (!user) {
-          return null; // User not found
-        }
-
-        // Compare passwords
-        const comparePassword = await bcrypt.compare(
-          credentials?.password as string,
-          user?.password as string,
+        const passwordMatched = compare(
+          credentials.password,
+          userExists?.password as string,
         );
 
-        if (!comparePassword) {
-          return null; // Passwords don't match
+        if (!passwordMatched) {
+          return null;
         }
-
-        return user; // Return the user if credentials are valid
+        return {
+          id: `${userExists?.id}`,
+          name: userExists?.name,
+          email: userExists?.email,
+          image: userExists?.image,
+        };
       },
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: 'jwt',
+    maxAge: 60 * 60,
+  },
+  jwt: {
+    secret: process.env.NEXTAUTH_JWT_SECRET,
+    maxAge: 60 * 60 * 24,
+  },
   callbacks: {
-    async signIn({ user }) {
-      let userInDb = await prismaInstance.user.findUnique({
-        where: { email: user.email as string },
-      });
-
-      // Create user if not found
-      if (!userInDb) {
-        userInDb = await prismaInstance.user.create({
-          data: {
-            name: user.name as string,
-            email: user.email as string,
-            image: user.image as string,
-          },
-        });
-      }
-      return true;
+    async session({ session, user, token }) {
+      return session;
+    },
+    async jwt({
+      token, user, account, profile, isNewUser,
+    }) {
+      return token;
     },
   },
 };
