@@ -2,6 +2,7 @@
 
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { SyntheticEvent } from 'react';
 
 export default function UserAvatar() {
@@ -28,7 +29,7 @@ export default function UserAvatar() {
       </div>
       <ul
         tabIndex={0}
-        className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+        className="menu space-y-3 menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
       >
         <li>
           <p className="justify-between">
@@ -37,7 +38,7 @@ export default function UserAvatar() {
           </p>
         </li>
         <li>
-          <p>Settings</p>
+          <Link href="/cart">Cart</Link>
         </li>
         <li>
           <button

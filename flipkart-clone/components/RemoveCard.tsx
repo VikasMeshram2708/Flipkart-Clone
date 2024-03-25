@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-export default function ProductCard({
+export default function RemoveCard({
   id,
   title,
   description,
@@ -20,7 +20,8 @@ export default function ProductCard({
   imageSrc: string;
   product: Product;
 }) {
-  const { AddToCart } = UseCart();
+  // @ts-ignore
+  const { RemoveItem } = UseCart();
   return (
     <div className="border-2 border-green-300 rounded-lg shadow-md overflow-hidden">
       <div className="relative h-80 overflow-hidden">
@@ -42,11 +43,11 @@ export default function ProductCard({
             {price}
           </p>
           <button
-            onClick={() => AddToCart(product)}
+            onClick={() => RemoveItem(product?.id)}
             type="button"
-            className="btn btn-success rounded-md btn-outline btn-md"
+            className="btn btn-outline btn-error font-bold rounded-md"
           >
-            Buy Now
+            Remove
           </button>
         </div>
       </div>
