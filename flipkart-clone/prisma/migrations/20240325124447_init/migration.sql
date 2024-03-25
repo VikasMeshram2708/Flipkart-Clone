@@ -1,8 +1,11 @@
 -- CreateTable
 CREATE TABLE "Products" (
     "id" SERIAL NOT NULL,
+    "productId" INTEGER NOT NULL,
     "title" VARCHAR(255) NOT NULL,
+    "price" TEXT NOT NULL,
     "description" TEXT NOT NULL,
+    "category" TEXT NOT NULL,
     "authorId" INTEGER NOT NULL,
 
     CONSTRAINT "Products_pkey" PRIMARY KEY ("id")

@@ -16,9 +16,15 @@ datasource db {
 model Products {
   id Int @id @default(autoincrement())
 
+  productId Int
+
   title String @db.VarChar(255)
 
+  price String
+
   description String
+
+  category String
 
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 

@@ -2,47 +2,28 @@ import ConnectDb from '@/helpers/Db';
 import prismaInstance from '@/helpers/PrismaInstance';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { NextRequest, NextResponse } from 'next/server';
-import bcrypt from 'bcryptjs';
 
-export const POST = async (req: NextRequest) => {
+export const POST = async (request: NextRequest) => {
   try {
-    const reqBody = await req.json();
-    console.log('incoming-data', reqBody);
+    const reqBody = await request.json();
+    const { id: userId } = reqBody;
 
-    const { email, password } = reqBody;
-
-    // Connect to DB
-
+    //  connect to DB
     await ConnectDb();
-    // Find the User
-    const user = await prismaInstance.user.findUnique({
+
+    // insert product to DB
+    const userWithProducts = await prismaInstance.user.findUnique({
       where: {
-        email,
+        id: userId,
+      },
+      select: {
+        products: true,
       },
     });
-
-    // Compare the password
-    const matchedPassword = await bcrypt.compare(
-      password,
-      user?.password as string,
-    );
-
-    if (!matchedPassword) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: 'Invalid Credentials provided',
-        },
-        {
-          status: 422,
-        },
-      );
-    }
-
     return NextResponse.json(
       {
         success: true,
-        message: 'User Logged in.',
+        data: userWithProducts,
       },
       {
         status: 200,
