@@ -5,9 +5,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { GiHamburgerMenu, GiCrossedSabres } from 'react-icons/gi';
+import { FaCartArrowDown } from 'react-icons/fa6';
+import { UseCart } from '@/app/context/CartState';
 import UserAvatar from './UserAvatar';
 
 export default function Navbar() {
+  // @ts-ignoreS
+  const { products } = UseCart();
   const path = usePathname();
   const [toggleSidebar, setToggleSidebar] = useState(false);
 
@@ -147,6 +151,12 @@ export default function Navbar() {
           </li>
         </ul>
         <div className="flex items-center gap-3">
+          <Link href="/cart" className="flex items-center gap-2">
+            <p className="text-lg font-bold text-green-500">
+              {products.length >= 1 && products?.length}
+            </p>
+            <FaCartArrowDown size={25} color="white" />
+          </Link>
           {status === 'loading' && (
             <span className="loading loading-infinity loading-lg" />
           )}
