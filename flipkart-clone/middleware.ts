@@ -11,7 +11,11 @@ export async function middleware(request: NextRequest) {
 
   // Preventing the user to access the /cart route
   if (path === '/cart' && !token) {
-    return NextResponse.redirect(new URL('/login', request.nextUrl));
+    return NextResponse.redirect(new URL('/api/auth/signin', request.nextUrl));
+  }
+
+  if (path === '/profile' && !token) {
+    return NextResponse.redirect(new URL('/api/auth/signin', request.nextUrl));
   }
 
   // preventing the authenticated user to access the login page.
@@ -22,5 +26,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/cart', '/login'],
+  matcher: ['/cart', '/login', '/profile'],
 };

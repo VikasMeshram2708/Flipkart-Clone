@@ -33,8 +33,10 @@ export default function UserAvatar() {
       >
         <li>
           <p className="justify-between">
-            Profile
-            <span className="badge">New</span>
+            <Link href="/profile">
+              Profile
+              <span className="badge">New</span>
+            </Link>
           </p>
         </li>
         <li>

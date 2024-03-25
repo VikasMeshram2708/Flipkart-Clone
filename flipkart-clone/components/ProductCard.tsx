@@ -20,6 +20,7 @@ export default function ProductCard({
   imageSrc: string;
   product: Product;
 }) {
+  // @ts-ignore
   const { AddToCart } = UseCart();
   return (
     <div className="border-2 border-green-300 rounded-lg shadow-md overflow-hidden">
