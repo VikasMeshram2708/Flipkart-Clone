@@ -17,6 +17,13 @@ export default function Login() {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
+      if (!email || !password) {
+        return toast.error('All the fields are required.');
+      }
+
+      if (!email.includes('@')) {
+        return toast.error('Please enter a valid email.');
+      }
       const result = await signIn('credentials', {
         redirect: false,
         email,
@@ -35,21 +42,20 @@ export default function Login() {
         }, 3000);
         resolve();
       });
+      setEmail('');
+      setPassword('');
       Promise.resolve();
       return result;
     } catch (e) {
       return console.log(e instanceof Error && e?.message);
-    } finally {
-      setEmail('');
-      setPassword('');
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    await signIn('google', {
-      callbackUrl: '/cart',
-    });
-  };
+  // const handleGoogleSignIn = async () => {
+  //   await signIn('google', {
+  //     callbackUrl: '/cart',
+  //   });
+  // };
   return (
     <section className="flex items-center justify-center h-screen bg-gray-900/30">
       <form
@@ -65,7 +71,7 @@ export default function Login() {
             value={email}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
             name="email"
-            type="email"
+            // type="email"
             id="email"
             className="w-full px-3 py-2 rounded-md bg-gray-700 text-gray-200 focus:outline-none focus:ring focus:border-blue-300"
           />
@@ -111,8 +117,9 @@ export default function Login() {
         </button>
         <button
           type="button"
-          onClick={handleGoogleSignIn}
-          className="w-full mt-3 btn btn-outline btn-base-300"
+          disabled
+          // onClick={handleGoogleSignIn}
+          className="w-full mt-3 btn btn-outline cursor-not-allowed btn-base-300"
         >
           Login with Google
         </button>
