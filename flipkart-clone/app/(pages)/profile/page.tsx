@@ -5,7 +5,6 @@ import React from 'react';
 
 export default function ProfilePage() {
   const { data } = useSession();
-
   return (
     <div className="min-h-screen bg-slate-900">
       <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -15,6 +14,8 @@ export default function ProfilePage() {
               <h3 className="text-lg leading-6 font-medium text-white">
                 Profile Information
               </h3>
+              {/* @ts-ignore */}
+              <p className="text-3xl text-white font-bold">{data?.user.id}</p>
               {/* <p className="mt-1 max-w-2xl text-sm text-white">
                 Update your profile details below.
               </p> */}

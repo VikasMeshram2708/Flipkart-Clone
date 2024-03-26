@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from 'next/server';
 export const POST = async (request: NextRequest) => {
   try {
     const reqBody = await request.json();
-    const { id: userId } = reqBody;
+    console.log('req-pro', reqBody);
 
     //  connect to DB
     await ConnectDb();
@@ -14,7 +14,7 @@ export const POST = async (request: NextRequest) => {
     // insert product to DB
     const userWithProducts = await prismaInstance.user.findUnique({
       where: {
-        id: userId,
+        email: reqBody.email,
       },
       select: {
         products: true,

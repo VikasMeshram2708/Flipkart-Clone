@@ -21,12 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="black">
       <body className={inter.className}>
-        <CartState>
-          <AuthProvider>
+        <AuthProvider>
+          <CartState>
             <Navbar />
             {children}
-          </AuthProvider>
-        </CartState>
+          </CartState>
+        </AuthProvider>
       </body>
     </html>
   );

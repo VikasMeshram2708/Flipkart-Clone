@@ -20,6 +20,8 @@ model Products {
 
   title String @db.VarChar(255)
 
+  image String
+
   price String
 
   description String

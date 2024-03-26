@@ -27,6 +27,7 @@ export const authOptions: NextAuthOptions = {
           placeholder: 'Enter password',
         },
       },
+      // @ts-ignore
       async authorize(credentials, req) {
         if (!credentials?.email || !credentials.password) {
           return null;
@@ -66,6 +67,8 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, token }) {
       if (session.user) {
+        // @ts-ignore
+        session.user.id = token.id;
         session.user.email = token.email;
         session.user.name = token.name;
       }
@@ -74,6 +77,7 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user }) {
       if (token && user) {
+        token.id = user.id;
         token.email = user.email;
         token.name = user.name;
       }

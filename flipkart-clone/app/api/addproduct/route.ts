@@ -5,20 +5,24 @@ import { NextRequest, NextResponse } from 'next/server';
 export const POST = async (request: NextRequest) => {
   try {
     const reqBody: UserProduct = await request.json();
+    const {
+      userId, productId, title, price, description, category, image,
+    } = reqBody;
     //  connect to DB
     await ConnectDb();
 
     // insert product to DB
     await prismaInstance.products.create({
       data: {
-        productId: reqBody.productId,
-        title: reqBody.title,
-        description: reqBody.description,
-        price: `${reqBody.price}`,
-        category: reqBody.category,
+        productId,
+        title,
+        description,
+        image,
+        price: `${price}`,
+        category,
         author: {
           connect: {
-            id: reqBody.userId,
+            id: userId,
           },
         },
       },
