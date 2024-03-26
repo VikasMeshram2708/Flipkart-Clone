@@ -13,8 +13,8 @@ export const DELETE = async (request: NextRequest) => {
     // Delete the item by it's id
     await prismaInstance.products.delete({
       where: {
-        id: productId,
-        authorId: userId,
+        id: +productId,
+        authorId: +userId,
       },
     });
 

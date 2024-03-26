@@ -55,11 +55,37 @@ export const CartState = ({ children }: CartProps) => {
   };
 
   // Remove from Cart Function
-  const RemoveItem = (productId: number) => {
-    toast.success('Item Removed.');
-    return setProducts(
-      products?.filter((product) => product?.id !== productId),
-    );
+  const RemoveItem = async (productId: number) => {
+    try {
+      const myData = {
+        // @ts-ignore
+        userId: +data?.user?.id,
+        productId: +productId,
+      };
+      const response = await fetch('/api/removeproduct', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(myData),
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        console.log('Item Removal failed');
+        return toast.error(result?.message);
+      }
+      toast.success(result.message);
+      setTimeout(() => {
+        router.refresh();
+      }, 3000);
+      await Promise.resolve();
+      return setProducts(
+        products?.filter((product) => product?.id !== productId),
+      );
+    } catch (error) {
+      return console.log('Failed to Removed the item. Please try again.');
+    }
   };
 
   useEffect(() => {

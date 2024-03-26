@@ -1,3 +1,5 @@
+/* eslint-disable radix */
+
 'use client';
 
 import { UseCart } from '@/app/context/CartState';
@@ -8,7 +10,7 @@ export default function Cart() {
   const { products } = UseCart();
 
   const getTotal = products?.reduce(
-    (total: any, product: { price: any }) => total + product.price,
+    (total: any, product: { price: any }) => total + parseInt(product.price),
     0,
   );
 
