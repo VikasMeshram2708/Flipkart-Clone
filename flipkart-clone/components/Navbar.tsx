@@ -54,7 +54,7 @@ export default function Navbar() {
                   Home
                 </Link>
               </li>
-              <li
+              {/* <li
                 className={`p-5 ${path === '/men' && 'border-l-8 border-green-300 bg-black'}`}
               >
                 <Link href="/men" className="p-2">
@@ -74,7 +74,7 @@ export default function Navbar() {
                 <Link href="/kids" className="p-2">
                   Kids
                 </Link>
-              </li>
+              </li> */}
               <li
                 className={`p-5 ${path === '/about' && 'border-l-8 border-green-300 bg-black'}`}
               >
@@ -114,7 +114,7 @@ export default function Navbar() {
           >
             <Link href="/">Home</Link>
           </li>
-          <li
+          {/* <li
             className={`${path === '/men' && 'border-b-4 border-green-300 p-5'}`}
           >
             <Link href="/men">Men</Link>
@@ -128,7 +128,7 @@ export default function Navbar() {
             className={`${path === '/kids' && 'border-b-4 border-green-300 p-5'}`}
           >
             <Link href="/kids">Kids</Link>
-          </li>
+          </li> */}
           <li
             className={`${path === '/about' && 'border-b-4 border-green-300 p-5'}`}
           >

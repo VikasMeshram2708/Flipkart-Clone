@@ -1,22 +1,23 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import NextAuth, { NextAuthOptions } from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
+// import GoogleProvider from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
 import prismaInstance from '@/helpers/PrismaInstance';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { compare } from 'bcryptjs';
+import bcrypt from 'bcryptjs';
+import ConnectDb from '@/helpers/Db';
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/login',
   },
   adapter: PrismaAdapter(prismaInstance),
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
+    // GoogleProvider({
+    //   clientId: process.env.GOOGLE_CLIENT_ID as string,
+    //   clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+    // }),
     Credentials({
       name: 'Credentials',
       credentials: {
@@ -33,13 +34,16 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
+        // connect to DB;
+        await ConnectDb();
+
         const userExists = await prismaInstance.user.findUnique({
           where: {
             email: credentials.email,
           },
         });
 
-        const passwordMatched = compare(
+        const passwordMatched = await bcrypt.compare(
           credentials.password,
           userExists?.password as string,
         );
