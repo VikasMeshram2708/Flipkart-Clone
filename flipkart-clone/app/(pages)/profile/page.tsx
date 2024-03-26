@@ -15,7 +15,6 @@ export default function ProfilePage() {
                 Profile Information
               </h3>
               {/* @ts-ignore */}
-              <p className="text-3xl text-white font-bold">{data?.user.id}</p>
               {/* <p className="mt-1 max-w-2xl text-sm text-white">
                 Update your profile details below.
               </p> */}

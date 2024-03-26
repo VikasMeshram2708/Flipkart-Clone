@@ -28,7 +28,7 @@ export const POST = async (req: NextRequest) => {
       );
     }
 
-    // hash teh password
+    // hash the password
     const hashedPassword = await bcrypt.hash(reqBody.password, 10);
     // Connect To DB
     await ConnectDb();

@@ -18,6 +18,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/api/auth/signin', request.nextUrl));
   }
 
+  if (path === '/signup' && token) {
+    return NextResponse.redirect(new URL('/', request.nextUrl));
+  }
+
   // preventing the authenticated user to access the login page.
   if (path.includes('/login') && token) {
     return NextResponse.redirect(new URL('/', request.nextUrl));
@@ -26,5 +30,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/cart', '/login', '/profile'],
+  matcher: ['/cart', '/login', '/profile', '/signup'],
 };
