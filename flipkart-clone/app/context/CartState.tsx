@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/function-component-definition */
@@ -101,10 +102,10 @@ export const CartState = ({ children }: CartProps) => {
       if (!response.ok) {
         return console.log(result.message);
       }
-      setProducts(result?.data?.products);
-      return console.log(result.data);
+      // console.log(result.data);
+      return setProducts(result?.data?.products);
     };
-    UserProducts();
+    data && UserProducts();
   }, [data]);
 
   return (
